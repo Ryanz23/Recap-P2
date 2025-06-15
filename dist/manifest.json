@@ -1,0 +1,34 @@
+{
+  "name": "Aplikasi Recap",
+  "short_name": "Recap",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#222",
+  "theme_color": "#222",
+  "description": "Aplikasi Recap dengan fitur PWA.",
+  "icons": [
+    {
+      "src": "src/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "src/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Tambah Film",
+      "short_name": "Tambah",
+      "description": "Langsung ke halaman tambah film",
+      "url": "/#/add",
+      "icons": [{ "src": "src/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "screenshots": [
+    { "src": "src/screenshots/desktop.png", "sizes": "1280x720", "type": "image/png" },
+    { "src": "src/screenshots/mobile.png", "sizes": "360x720", "type": "image/png" }
+  ]
+}
