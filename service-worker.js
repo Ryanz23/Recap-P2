@@ -3,11 +3,7 @@ const urlsToCache = [
   '/',
   '/index.html',
   '/bundle.js',
-  '/style.css',
   '/manifest.json',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png',
-  '/favicon.ico'
 ];
 
 // ✅ Install: Caching file statis
