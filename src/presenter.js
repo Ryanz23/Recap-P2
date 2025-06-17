@@ -1,100 +1,82 @@
-import { login, getStories, saveToken, getToken, clearToken, addStory } from './model.js';
-import { saveMovie, getAllMovies, deleteMovie } from './idb.js';
+import { login, saveToken, getToken, clearToken, addStory } from './model.js';
+import { saveStory, getAllStories, deleteStory } from './idb.js';
 import { 
-  showLoginForm, showStoryList, showAddFilmForm, showSavedStories,
-  bindLoginForm, bindStoryListEvents, bindAddFilmForm, bindSavedListEvents
+  showLoginForm, showStoryList, showAddStoryForm, showSavedStories,
+  bindLoginForm, bindStoryListEvents, bindAddStoryForm, bindSavedListEvents
 } from './view.js';
+import { getStories } from './model.js';
 
 export function initApp(container) {
-  if (getToken()) {
-    loadStories(container);
-  } else {
-    renderLogin(container);
-  }
+  // Hanya tampilkan login
+  renderLogin(container);
 }
 
 export function renderLogin(container) {
-  if (document.startViewTransition) {
-    document.startViewTransition(() => {
-      container.innerHTML = showLoginForm();
-      bindLoginForm(container, async (email, password, setMessage) => {
-        setMessage('Logging in...');
-        const result = await login(email, password);
-        if (!result.error) {
-          saveToken(result.loginResult.token);
-          loadStories(container);
-        } else {
-          setMessage('Login gagal: ' + result.message);
-        }
-      });
-    });
-  } else {
-    container.innerHTML = showLoginForm();
-    bindLoginForm(container, async (email, password, setMessage) => {
-      setMessage('Logging in...');
-      const result = await login(email, password);
-      if (!result.error) {
-        saveToken(result.loginResult.token);
-        loadStories(container);
-      } else {
-        setMessage('Login gagal: ' + result.message);
-      }
-    });
-  }
-}
-
-// Fungsi untuk menampilkan daftar film
-export async function loadStories(container) {
-  const token = getToken();
-  const result = await getStories(token);
-  if (result.error && result.message === 'Offline') {
-    // Ambil data dari IndexedDB
-    const savedStories = await getAllMovies();
-    container.innerHTML = showStoryList(savedStories);
-    container.innerHTML += '<p>Anda sedang offline. Data diambil dari penyimpanan lokal.</p>';
-  } else {
-    // Ambil semua id story yang sudah disimpan di IndexedDB
-    const saved = await getAllMovies();
-    const savedIds = saved.map(s => s.id);
-
+  container.innerHTML = showLoginForm();
+  bindLoginForm(container, async (email, password, setMessage) => {
+    setMessage('Loading...');
+    const result = await login(email, password);
     if (!result.error) {
-      container.innerHTML = showStoryList(result.listStory, savedIds);
-      bindStoryListEvents(container, {
-        onHome: () => window.location.hash = '#/',
-        onAdd: () => window.location.hash = '#/add',
-        onSaved: () => window.location.hash = '#/saved',
-        onLogout: () => {
-          clearToken();
-          renderLogin(container);
-        },
-        onSave: async (id) => {
-          const story = result.listStory.find(s => s.id === id);
-          await saveMovie(story);
-          loadStories(container);
-        },
-        onMapReady: (map, stories) => {
-          const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '...' });
-          const sat = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', { attribution: '...' });
-          map.addLayer(osm);
-          L.control.layers({ "OSM": osm, "Satellite": sat }).addTo(map);
-
-          stories.forEach(story => {
-            if (story.lat && story.lon) {
-              const marker = L.marker([story.lat, story.lon]).addTo(map);
-              marker.bindPopup(`<b>${story.name}</b><br>${story.description}`);
-            }
-          });
-        }
-      }, result.listStory);
+      saveToken(result.loginResult.token);
+      window.location.hash = '#/';
     } else {
-      container.innerHTML = '<p>Gagal memuat data.</p>';
+      setMessage('Login gagal: ' + result.message);
     }
+  });
+}
+
+// Fungsi untuk menampilkan daftar cerita
+export async function loadStories(container) {
+  container.innerHTML = '<p>Loading stories...</p>';
+  try {
+    const token = getToken();
+    if (!token) {
+      window.location.hash = '#/login';
+      return;
+    }
+    // Ganti baris ini:
+    // const stories = await fetchStories(token);
+    // Menjadi:
+    const response = await getStories(token);
+    if (response.error) {
+      container.innerHTML = `<p>Error loading stories: ${response.message}</p>`;
+      return;
+    }
+    const stories = response.listStory || [];
+    container.innerHTML = showStoryList(stories);
+    // Pastikan handlers sudah didefinisikan sebelum dipakai
+    bindStoryListEvents(container, {
+      onAdd: () => window.location.hash = '#/add',
+      onLogout: () => {
+        clearToken();
+        renderLogin(container);
+      },
+      onHome: () => window.location.hash = '#/',
+      onSaved: () => window.location.hash = '#/saved',
+      onSave: async (id) => {
+        const story = stories.find(s => s.id === id);
+        if (story) {
+          await saveStory(story);
+          loadStories(container);
+        }
+      },
+      onMapReady: (map, stories) => {
+        stories.forEach(story => {
+          if (story.lat && story.lon) {
+            L.marker([story.lat, story.lon]).addTo(map)
+              .bindPopup(`<b>${story.name}</b><br>${story.description}`);
+          }
+        });
+      }
+    }, stories);
+  } catch (err) {
+    container.innerHTML = `<p>Error loading stories: ${err.message}</p>`;
   }
 }
 
-export async function renderAddFilm(container) {
-  container.innerHTML = showAddFilmForm();
-  bindAddFilmForm(container, async (formData, setMessage, stopCamera) => {
+export async function renderAddStory(container) {
+  container.innerHTML = showAddStoryForm();
+  bindAddStoryForm(container, async (formData, setMessage, stopCamera) => {
     const token = getToken();
     const result = await addStory(token, formData);
     setMessage(result.message);
@@ -103,9 +85,19 @@ export async function renderAddFilm(container) {
       // Tambahkan setelah story berhasil dibuat
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.ready.then(reg => {
-          reg.showNotification('Story berhasil dibuat', {
-            body: `Anda telah membuat story baru dengan deskripsi: ${formData.get('description')}`
-          });
+          if (Notification.permission === 'granted') {
+            reg.showNotification('Story berhasil dibuat', {
+              body: `Anda telah membuat story baru dengan deskripsi: ${formData.get('description')}`
+            });
+          } else if (Notification.permission !== 'denied') {
+            Notification.requestPermission().then(permission => {
+              if (permission === 'granted') {
+                reg.showNotification('Story berhasil dibuat', {
+                  body: `Anda telah membuat story baru dengan deskripsi: ${formData.get('description')}`
+                });
+              }
+            });
+          }
         });
       }
       window.location.hash = '#/';
@@ -115,7 +107,7 @@ export async function renderAddFilm(container) {
 
 // Halaman Saved Stories
 export async function renderSavedStories(container) {
-  const saved = await getAllMovies();
+  const saved = await getAllStories();
   container.innerHTML = showSavedStories(saved);
   bindSavedListEvents(container, {
     onHome: () => window.location.hash = '#/',
@@ -124,7 +116,7 @@ export async function renderSavedStories(container) {
       renderLogin(container);
     },
     onDelete: async (id) => {
-      await deleteMovie(id);
+      await deleteStory(id);
       renderSavedStories(container);
     }
   });
@@ -139,7 +131,7 @@ export function renderLoginOrHome(container) {
 }
 
 export async function loadSavedStoriesOffline() {
-  const saved = await getAllMovies();
+  const saved = await getAllStories();
   // Tampilkan data yang disimpan secara offline
   document.getElementById('offline-content').innerHTML = showSavedStories(saved);
 }

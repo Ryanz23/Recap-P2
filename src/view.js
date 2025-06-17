@@ -1,24 +1,40 @@
 export function showLoginForm() {
   return `
-    <h2>Login</h2>
-    <form id="login-form">
-      <label for="email">Email</label>
-      <input type="email" id="email" placeholder="Email" required><br>
-      <label for="password">Password</label>
-      <input type="password" id="password" placeholder="Password" required><br>
-      <button type="submit">Login</button>
-    </form>
-    <p id="login-message"></p>
+    <div class="login-container">
+      
+      <section class="login-form-section">
+        <h2>Masuk ke Recap</h2>
+        <form id="login-form" autocomplete="on">
+          <div class="input-group">
+            <span class="input-icon">@</span>
+            <input type="email" id="email" name="email" placeholder="Email" required autocomplete="username" />
+          </div>
+          <div class="input-group">
+            <span class="input-icon">🔒</span>
+            <input type="password" id="password" name="password" placeholder="Password" required autocomplete="current-password" />
+          </div>
+          <button class="login-btn" type="submit">Masuk</button>
+        </form>
+        <div class="login-extra">
+          <a href="#">Lupa password?</a>
+        </div>
+        <div id="login-message" class="login-message"></div>
+      </section>
+    </div>
   `;
 }
 
 export function showStoryList(stories, savedIds = []) {
   return `
-    <nav>
-      <button id="home-btn">Home</button>
-      <button id="add-btn">Tambah Film</button>
-      <button id="saved-btn">Saved Stories</button>
-      <button id="logout-btn">Logout</button>
+    <nav class="navbar">
+      <div class="nav-left">
+        <button id="home-btn">Home</button>
+        <button id="add-btn">Tambah Cerita</button>
+        <button id="saved-btn">Saved Stories</button>
+      </div>
+      <div class="nav-right">
+        <button id="logout-btn">Logout</button>
+      </div>
     </nav>
     <div id="stories-list" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin: 24px 0;">
       ${stories.map(story => `
@@ -33,33 +49,46 @@ export function showStoryList(stories, savedIds = []) {
       `).join('')}
     </div>
     <div id="map" style="height: 300px; margin-top: 32px; border-radius: 12px; overflow: hidden;"></div>
-  `
+  `;
 }
 
-export function showAddFilmForm() {
+export function showAddStoryForm() {
   return `
-    <h2>Tambah Film</h2>
-    <form id="add-film-form" enctype="multipart/form-data" style="max-width: 400px; margin: 0 auto;">
-      <label for="description">Sinopsis</label>
-      <textarea id="description" required placeholder="Tulis sinopsis film..."></textarea>
-      <label for="photo">Poster Film</label>
-      <input type="file" id="photo" accept="image/*" required>
-      <div class="camera-section">
-        <video id="video" width="200" autoplay></video>
-        <button type="button" id="capture-btn">Ambil dari Kamera</button>
-        <canvas id="canvas" width="200" height="150" style="display:none;"></canvas>
-      </div>
-      <label for="lat">Latitude</label>
-      <input type="text" id="lat" required>
-      <label for="lon">Longitude</label>
-      <input type="text" id="lon" required>
-      <div style="display: flex; gap: 8px; margin-top: 16px;">
-        <button type="submit">Tambah</button>
-        <button type="button" id="cancel-btn">Batal</button>
-      </div>
-    </form>
-    <div id="add-film-message"></div>
-    <div id="map-add" style="height: 300px; margin-top: 32px; border-radius: 12px; overflow: hidden;"></div>
+    <section class="add-story-section">
+      <h2>Tambah Cerita</h2>
+      <form id="add-story-form" class="add-story-form">
+        <div class="form-row">
+          <label for="description">Sinopsis Cerita</label>
+          <textarea id="description" name="description" placeholder="Tulis sinopsis cerita..." required></textarea>
+        </div>
+        <div class="form-row">
+          <label for="photo">Poster Cerita</label>
+          <input type="file" id="photo" name="photo" accept="image/*" required>
+        </div>
+        <div class="form-row">
+          <img id="preview" style="display:none;max-width:100%;margin-bottom:1rem;" />
+        </div>
+        <div class="form-row">
+          <video id="video" autoplay playsinline style="max-width: 100%; border-radius: 8px;"></video>
+          <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+        </div>
+        <div class="form-row">
+          <button type="button" id="capture-btn">Ambil dari Kamera</button>
+        </div>
+        <div class="form-row">
+          <label for="lat">Latitude</label>
+          <input type="text" id="lat" name="lat" required>
+          <label for="lon" style="margin-left:1rem;">Longitude</label>
+          <input type="text" id="lon" name="lon" required>
+        </div>
+        <div id="map-add" style="height: 300px; margin: 24px 0; border-radius: 12px;"></div>
+        <div class="form-row button-row">
+          <button type="submit">Tambah Cerita</button>
+          <button type="button" id="cancel-btn">Batal</button>
+        </div>
+        <div id="add-story-message"></div>
+      </form>
+    </section>
   `;
 }
 
@@ -90,7 +119,6 @@ export function showSavedStories(stories) {
   `;
 }
 
-// Event binding untuk login
 export function bindLoginForm(container, onSubmit) {
   const form = container.querySelector('#login-form');
   const message = container.querySelector('#login-message');
@@ -102,48 +130,53 @@ export function bindLoginForm(container, onSubmit) {
   });
 }
 
-// Event binding untuk story list dan peta
 export function bindStoryListEvents(container, handlers, stories) {
-  container.querySelector('#add-btn').onclick = handlers.onAdd;
+  const addBtn = container.querySelector('#add-btn');
+  if (addBtn && handlers.onAdd) addBtn.onclick = handlers.onAdd;
   container.querySelector('#logout-btn').onclick = handlers.onLogout;
   container.querySelector('#home-btn').onclick = handlers.onHome;
   container.querySelector('#saved-btn').onclick = handlers.onSaved;
 
-  // Save button
   container.querySelectorAll('.save-btn').forEach(btn => {
     btn.onclick = () => handlers.onSave(btn.dataset.id);
   });
 
-  // Map
   if (typeof L !== 'undefined') {
     setTimeout(() => {
       const map = L.map('map').setView([-6.2, 106.8], 5);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
       handlers.onMapReady(map, stories);
     }, 100);
   }
 }
 
 export function bindSavedListEvents(container, handlers) {
-  container.querySelector('#home-btn').onclick = handlers.onHome;
-  container.querySelector('#logout-btn').onclick = handlers.onLogout;
+  const homeBtn = container.querySelector('#home-btn');
+  if (homeBtn) homeBtn.onclick = handlers.onHome;
+
+  const logoutBtn = container.querySelector('#logout-btn');
+  if (logoutBtn) logoutBtn.onclick = handlers.onLogout;
+
   container.querySelectorAll('.delete-saved-btn').forEach(btn => {
     btn.onclick = () => handlers.onDelete(btn.dataset.id);
   });
 }
 
-// Event binding untuk tambah film, kamera, dan peta
-export function bindAddFilmForm(container, onSubmit) {
-  const form = container.querySelector('#add-film-form');
-  const message = container.querySelector('#add-film-message');
+export function bindAddStoryForm(container, onSubmit) {
+  const form = container.querySelector('#add-story-form');
+  const message = container.querySelector('#add-story-message');
   const video = container.querySelector('#video');
   const canvas = container.querySelector('#canvas');
   const captureBtn = container.querySelector('#capture-btn');
   const cancelBtn = container.querySelector('#cancel-btn');
   let stream;
 
-  // Peta lokasi
+  // Peta
   if (typeof L !== 'undefined') {
-    const map = L.map(container.querySelector('#map-add')).setView([-2.5489, 118.0149], 5);
+    const mapContainer = container.querySelector('#map-add');
+    const map = L.map(mapContainer).setView([-2.5489, 118.0149], 5);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
@@ -184,7 +217,6 @@ export function bindAddFilmForm(container, onSubmit) {
     await onSubmit(formData, msg => message.textContent = msg, () => {});
   });
 
-  // Tombol batal kembali ke menu utama
   cancelBtn.addEventListener('click', () => {
     window.location.hash = '#/';
   });

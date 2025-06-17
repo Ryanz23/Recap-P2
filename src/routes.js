@@ -1,22 +1,28 @@
-import { loadStories, renderLogin, renderAddFilm, renderSavedStories } from './presenter.js';
+import { loadStories, renderLogin, renderAddStory, renderSavedStories } from './presenter.js';
 import { showNotFound } from './view.js';
+import { getToken } from './model.js';
 
 export function router(container) {
   const hash = window.location.hash;
-  if (hash === '#/add') {
-    renderAddFilm(container);
+  const token = getToken();
+
+  if ((!hash || hash === '#/login') && token) {
+    window.location.hash = '#/';
+    return;
+  }
+  if (!token && hash !== '#/login') {
+    window.location.hash = '#/login';
+    return;
+  }
+
+  if (hash === '#/login') {
+    renderLogin(container);
   } else if (hash === '#/saved') {
     renderSavedStories(container);
-  } else if (hash === '#/login' || !hash) {
-    renderLogin(container);
-  } else if (hash === '#/' || hash === '') {
-    loadStories(container);
+  } else if (hash === '#/add') {
+    renderAddStory(container);
   } else {
-    container.innerHTML = showNotFound();
-    const backBtn = container.querySelector('#back-home');
-    if (backBtn) {
-      backBtn.onclick = () => window.location.hash = '#/';
-    }
+    loadStories(container); // beranda
   }
 }
 

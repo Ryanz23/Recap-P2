@@ -726,103 +726,20 @@ ___CSS_LOADER_EXPORT___.push([module.id, `body {
 }
 
 header {
-  background: #222;
+  background: #ec7480;      /* warna sama dengan tombol login */
   color: #fff;
-  padding: 1rem 2rem;
+  padding: 0.7rem 0;
   text-align: center;
-  letter-spacing: 2px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  box-shadow: 0 2px 8px rgba(255,111,125,0.15);
 }
 
 input#searchInput {
   flex-grow: 1;
   padding: 5px;
   font-size: 1rem;
-}
-
-.film-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 15px;
-  margin-top: 20px;
-}
-
-.film-item {
-  cursor: pointer;
-  border: 1px solid #ddd;
-  padding: 10px;
-  border-radius: 5px;
-  transition: box-shadow 0.3s ease;
-}
-
-.film-item:hover {
-  box-shadow: 0 0 8px #aaa;
-}
-
-.film-item img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 5px;
-}
-
-.film-title {
-  font-weight: bold;
-  margin: 10px 0 5px;
-}
-
-.film-year {
-  color: gray;
-  font-size: 0.9rem;
-}
-
-.film-detail {
-  margin-top: 20px;
-}
-
-.back-button {
-  margin-top: 10px;
-  cursor: pointer;
-  color: blue;
-  text-decoration: underline;
-}
-
-/* Tambahkan di style.css */
-.skip-link {
-  position: absolute;
-  left: -999px;
-  top: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-.skip-link:focus {
-  left: 0;
-  width: auto;
-  height: auto;
-  background: #fff;
-  z-index: 1000;
-}
-
-.main-nav ul {
-  display: flex;
-  gap: 1rem;
-  list-style: none;
-  padding: 0;
-  margin: 1rem 0;
-  justify-content: center;
-}
-
-.main-nav button {
-  background: #1976d2;
-  color: #fff;
-  border: none;
-  padding: 0.5rem 1.2rem;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background 0.2s;
-}
-.main-nav button:hover {
-  background: #1565c0;
 }
 
 .stories-list {
@@ -868,7 +785,7 @@ input#searchInput {
   color: #555;
 }
 
-.add-film-section {
+.add-story-section {
   max-width: 500px;
   margin: 2rem auto;
   background: #fff;
@@ -877,24 +794,34 @@ input#searchInput {
   padding: 2rem;
 }
 
-.add-film-form label {
-  display: block;
-  margin-top: 1rem;
+.add-story-form .form-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.add-story-form label {
   margin-bottom: 0.3rem;
   font-weight: 500;
 }
 
-.add-film-form input,
-.add-film-form textarea {
+.add-story-form input,
+.add-story-form textarea {
   width: 100%;
   padding: 0.5rem;
   border-radius: 6px;
   border: 1px solid #ccc;
-  margin-bottom: 0.7rem;
   font-size: 1rem;
+  margin-bottom: 0.5rem;
 }
 
-.add-film-form button[type="submit"] {
+.add-story-form .button-row {
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.add-story-form button[type="submit"],
+.add-story-form button[type="button"] {
   background: #388e3c;
   color: #fff;
   border: none;
@@ -902,18 +829,19 @@ input#searchInput {
   border-radius: 6px;
   font-size: 1rem;
   cursor: pointer;
-  margin-top: 1rem;
 }
-.add-film-form button[type="submit"]:hover {
+
+.add-story-form button[type="button"]#cancel-btn {
+  background: #bdbdbd;
+  color: #222;
+}
+
+.add-story-form button[type="submit"]:hover {
   background: #2e7031;
 }
 
-.camera-section {
-  margin: 1rem 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.5rem;
+.add-story-form button[type="button"]:hover {
+  background: #888;
 }
 
 @media (max-width: 600px) {
@@ -939,8 +867,8 @@ input#searchInput {
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-  max-width: 700px;
-  margin: 2rem auto;
+  max-width: 340px;   /* dari sebelumnya 370px atau lebih */
+  margin: 3rem auto;
   overflow: hidden;
 }
 .login-illustration {
@@ -1034,6 +962,76 @@ input#searchInput {
   }
 }
 
+/* Navbar Modern */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 2px 8px rgba(255,111,125,0.07);
+  padding: 0.7rem 2rem 0.7rem 2rem;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.nav-left, .nav-right {
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar button {
+  background: #fff;
+  color: #ff6b6b;
+  border: 1.5px solid #ff6b6b;
+  border-radius: 6px;
+  padding: 0.45rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  text-decoration: none;
+}
+
+.navbar button:hover {
+  background: #ff6b6b;
+  color: #fff;
+}
+
+@media (max-width: 700px) {
+  .navbar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.7rem 0.5rem;
+    gap: 0.5rem;
+  }
+  .nav-left, .nav-right {
+    justify-content: center;
+    gap: 0.5rem;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 100;
+  background: #222;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+.skip-link:focus {
+  left: 16px;
+  top: 16px;
+  width: auto;
+  height: auto;
+  outline: 2px solid #1976d2;
+}
+
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: fade-in 0.5s;
@@ -1041,7 +1039,9 @@ input#searchInput {
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
-}`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;EACE,0CAA0C;EAC1C,mBAAmB;EACnB,SAAS;EACT,WAAW;AACb;;AAEA;EACE,gBAAgB;EAChB,WAAW;EACX,kBAAkB;EAClB,kBAAkB;EAClB,mBAAmB;AACrB;;AAEA;EACE,YAAY;EACZ,YAAY;EACZ,eAAe;AACjB;;AAEA;EACE,aAAa;EACb,4DAA4D;EAC5D,SAAS;EACT,gBAAgB;AAClB;;AAEA;EACE,eAAe;EACf,sBAAsB;EACtB,aAAa;EACb,kBAAkB;EAClB,gCAAgC;AAClC;;AAEA;EACE,wBAAwB;AAC1B;;AAEA;EACE,eAAe;EACf,YAAY;EACZ,kBAAkB;AACpB;;AAEA;EACE,iBAAiB;EACjB,kBAAkB;AACpB;;AAEA;EACE,WAAW;EACX,iBAAiB;AACnB;;AAEA;EACE,gBAAgB;AAClB;;AAEA;EACE,gBAAgB;EAChB,eAAe;EACf,WAAW;EACX,0BAA0B;AAC5B;;AAEA,2BAA2B;AAC3B;EACE,kBAAkB;EAClB,YAAY;EACZ,SAAS;EACT,UAAU;EACV,WAAW;EACX,gBAAgB;AAClB;AACA;EACE,OAAO;EACP,WAAW;EACX,YAAY;EACZ,gBAAgB;EAChB,aAAa;AACf;;AAEA;EACE,aAAa;EACb,SAAS;EACT,gBAAgB;EAChB,UAAU;EACV,cAAc;EACd,uBAAuB;AACzB;;AAEA;EACE,mBAAmB;EACnB,WAAW;EACX,YAAY;EACZ,sBAAsB;EACtB,kBAAkB;EAClB,eAAe;EACf,eAAe;EACf,2BAA2B;AAC7B;AACA;EACE,mBAAmB;AACrB;;AAEA;EACE,aAAa;EACb,eAAe;EACf,WAAW;EACX,uBAAuB;EACvB,cAAc;AAChB;;AAEA;EACE,gBAAgB;EAChB,mBAAmB;EACnB,sCAAsC;EACtC,gBAAgB;EAChB,YAAY;EACZ,aAAa;EACb,sBAAsB;AACxB;;AAEA;EACE,WAAW;EACX,aAAa;EACb,iBAAiB;AACnB;;AAEA;EACE,aAAa;AACf;;AAEA;EACE,oBAAoB;EACpB,iBAAiB;EACjB,cAAc;AAChB;;AAEA;EACE,oBAAoB;AACtB;;AAEA;EACE,iBAAiB;EACjB,WAAW;AACb;;AAEA;EACE,gBAAgB;EAChB,iBAAiB;EACjB,gBAAgB;EAChB,mBAAmB;EACnB,sCAAsC;EACtC,aAAa;AACf;;AAEA;EACE,cAAc;EACd,gBAAgB;EAChB,qBAAqB;EACrB,gBAAgB;AAClB;;AAEA;;EAEE,WAAW;EACX,eAAe;EACf,kBAAkB;EAClB,sBAAsB;EACtB,qBAAqB;EACrB,eAAe;AACjB;;AAEA;EACE,mBAAmB;EACnB,WAAW;EACX,YAAY;EACZ,sBAAsB;EACtB,kBAAkB;EAClB,eAAe;EACf,eAAe;EACf,gBAAgB;AAClB;AACA;EACE,mBAAmB;AACrB;;AAEA;EACE,cAAc;EACd,aAAa;EACb,sBAAsB;EACtB,uBAAuB;EACvB,WAAW;AACb;;AAEA;EACE;IACE,sBAAsB;IACtB,mBAAmB;EACrB;EACA;IACE,WAAW;EACb;EACA;IACE,WAAW;IACX,kBAAkB;EACpB;AACF;;AAEA,sBAAsB;AACtB;EACE,aAAa;EACb,gBAAgB;EAChB,mBAAmB;EACnB,uBAAuB;EACvB,gBAAgB;EAChB,mBAAmB;EACnB,uCAAuC;EACvC,gBAAgB;EAChB,iBAAiB;EACjB,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,iBAAiB;AACnB;AACA;EACE,YAAY;EACZ,YAAY;AACd;AACA;EACE,OAAO;EACP,oBAAoB;EACpB,aAAa;EACb,sBAAsB;EACtB,uBAAuB;AACzB;AACA;EACE,qBAAqB;EACrB,WAAW;EACX,eAAe;EACf,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,mBAAmB;EACnB,mBAAmB;EACnB,kBAAkB;EAClB,mBAAmB;EACnB,oBAAoB;EACpB,sBAAsB;AACxB;AACA;EACE,oBAAoB;EACpB,WAAW;EACX,iBAAiB;AACnB;AACA;;EAEE,YAAY;EACZ,uBAAuB;EACvB,aAAa;EACb,eAAe;EACf,OAAO;EACP,iBAAiB;AACnB;AACA;EACE,WAAW;EACX,mBAAmB;EACnB,WAAW;EACX,YAAY;EACZ,iBAAiB;EACjB,kBAAkB;EAClB,iBAAiB;EACjB,gBAAgB;EAChB,kBAAkB;EAClB,eAAe;EACf,2BAA2B;AAC7B;AACA;EACE,mBAAmB;AACrB;AACA;EACE,kBAAkB;EAClB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,cAAc;EACd,qBAAqB;EACrB,gBAAgB;AAClB;AACA;EACE,0BAA0B;AAC5B;AACA;EACE;IACE,sBAAsB;IACtB,eAAe;EACjB;EACA;IACE,WAAW;IACX,iBAAiB;EACnB;EACA;IACE,oBAAoB;EACtB;AACF;;AAEA;;EAEE,uBAAuB;AACzB;AACA;EACE,OAAO,UAAU,EAAE;EACnB,KAAK,UAAU,EAAE;AACnB","sourcesContent":["body {\r\n  font-family: 'Segoe UI', Arial, sans-serif;\r\n  background: #f5f6fa;\r\n  margin: 0;\r\n  color: #222;\r\n}\r\n\r\nheader {\r\n  background: #222;\r\n  color: #fff;\r\n  padding: 1rem 2rem;\r\n  text-align: center;\r\n  letter-spacing: 2px;\r\n}\r\n\r\ninput#searchInput {\r\n  flex-grow: 1;\r\n  padding: 5px;\r\n  font-size: 1rem;\r\n}\r\n\r\n.film-list {\r\n  display: grid;\r\n  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));\r\n  gap: 15px;\r\n  margin-top: 20px;\r\n}\r\n\r\n.film-item {\r\n  cursor: pointer;\r\n  border: 1px solid #ddd;\r\n  padding: 10px;\r\n  border-radius: 5px;\r\n  transition: box-shadow 0.3s ease;\r\n}\r\n\r\n.film-item:hover {\r\n  box-shadow: 0 0 8px #aaa;\r\n}\r\n\r\n.film-item img {\r\n  max-width: 100%;\r\n  height: auto;\r\n  border-radius: 5px;\r\n}\r\n\r\n.film-title {\r\n  font-weight: bold;\r\n  margin: 10px 0 5px;\r\n}\r\n\r\n.film-year {\r\n  color: gray;\r\n  font-size: 0.9rem;\r\n}\r\n\r\n.film-detail {\r\n  margin-top: 20px;\r\n}\r\n\r\n.back-button {\r\n  margin-top: 10px;\r\n  cursor: pointer;\r\n  color: blue;\r\n  text-decoration: underline;\r\n}\r\n\r\n/* Tambahkan di style.css */\r\n.skip-link {\r\n  position: absolute;\r\n  left: -999px;\r\n  top: auto;\r\n  width: 1px;\r\n  height: 1px;\r\n  overflow: hidden;\r\n}\r\n.skip-link:focus {\r\n  left: 0;\r\n  width: auto;\r\n  height: auto;\r\n  background: #fff;\r\n  z-index: 1000;\r\n}\r\n\r\n.main-nav ul {\r\n  display: flex;\r\n  gap: 1rem;\r\n  list-style: none;\r\n  padding: 0;\r\n  margin: 1rem 0;\r\n  justify-content: center;\r\n}\r\n\r\n.main-nav button {\r\n  background: #1976d2;\r\n  color: #fff;\r\n  border: none;\r\n  padding: 0.5rem 1.2rem;\r\n  border-radius: 6px;\r\n  cursor: pointer;\r\n  font-size: 1rem;\r\n  transition: background 0.2s;\r\n}\r\n.main-nav button:hover {\r\n  background: #1565c0;\r\n}\r\n\r\n.stories-list {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  gap: 1.5rem;\r\n  justify-content: center;\r\n  margin: 2rem 0;\r\n}\r\n\r\n.story-card {\r\n  background: #fff;\r\n  border-radius: 12px;\r\n  box-shadow: 0 2px 8px rgba(0,0,0,0.07);\r\n  overflow: hidden;\r\n  width: 300px;\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n\r\n.story-img {\r\n  width: 100%;\r\n  height: 200px;\r\n  object-fit: cover;\r\n}\r\n\r\n.story-info {\r\n  padding: 1rem;\r\n}\r\n\r\n.story-title {\r\n  margin: 0 0 0.5rem 0;\r\n  font-size: 1.2rem;\r\n  color: #1976d2;\r\n}\r\n\r\n.story-desc {\r\n  margin: 0 0 0.5rem 0;\r\n}\r\n\r\n.story-meta {\r\n  font-size: 0.9rem;\r\n  color: #555;\r\n}\r\n\r\n.add-film-section {\r\n  max-width: 500px;\r\n  margin: 2rem auto;\r\n  background: #fff;\r\n  border-radius: 12px;\r\n  box-shadow: 0 2px 8px rgba(0,0,0,0.07);\r\n  padding: 2rem;\r\n}\r\n\r\n.add-film-form label {\r\n  display: block;\r\n  margin-top: 1rem;\r\n  margin-bottom: 0.3rem;\r\n  font-weight: 500;\r\n}\r\n\r\n.add-film-form input,\r\n.add-film-form textarea {\r\n  width: 100%;\r\n  padding: 0.5rem;\r\n  border-radius: 6px;\r\n  border: 1px solid #ccc;\r\n  margin-bottom: 0.7rem;\r\n  font-size: 1rem;\r\n}\r\n\r\n.add-film-form button[type=\"submit\"] {\r\n  background: #388e3c;\r\n  color: #fff;\r\n  border: none;\r\n  padding: 0.7rem 1.5rem;\r\n  border-radius: 6px;\r\n  font-size: 1rem;\r\n  cursor: pointer;\r\n  margin-top: 1rem;\r\n}\r\n.add-film-form button[type=\"submit\"]:hover {\r\n  background: #2e7031;\r\n}\r\n\r\n.camera-section {\r\n  margin: 1rem 0;\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: flex-start;\r\n  gap: 0.5rem;\r\n}\r\n\r\n@media (max-width: 600px) {\r\n  #stories-list {\r\n    flex-direction: column;\r\n    align-items: center;\r\n  }\r\n  .story-card {\r\n    width: 95vw;\r\n  }\r\n  nav button {\r\n    width: 100%;\r\n    margin-bottom: 8px;\r\n  }\r\n}\r\n\r\n/* Login Page Modern */\r\n.login-container {\r\n  display: flex;\r\n  min-height: 80vh;\r\n  align-items: center;\r\n  justify-content: center;\r\n  background: #fff;\r\n  border-radius: 16px;\r\n  box-shadow: 0 4px 24px rgba(0,0,0,0.08);\r\n  max-width: 700px;\r\n  margin: 2rem auto;\r\n  overflow: hidden;\r\n}\r\n.login-illustration {\r\n  background: #ffe0e0;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  width: 320px;\r\n  min-height: 350px;\r\n}\r\n.login-illustration img {\r\n  width: 220px;\r\n  height: auto;\r\n}\r\n.login-form-section {\r\n  flex: 1;\r\n  padding: 2rem 2.5rem;\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n}\r\n.login-form-section h2 {\r\n  margin-bottom: 1.5rem;\r\n  color: #222;\r\n  font-size: 2rem;\r\n  font-weight: 700;\r\n}\r\n.input-group {\r\n  display: flex;\r\n  align-items: center;\r\n  background: #f5f6fa;\r\n  border-radius: 8px;\r\n  margin-bottom: 1rem;\r\n  padding: 0.5rem 1rem;\r\n  border: 1px solid #ddd;\r\n}\r\n.input-icon {\r\n  margin-right: 0.7rem;\r\n  color: #888;\r\n  font-size: 1.1rem;\r\n}\r\n.login-form-section input[type=\"email\"],\r\n.login-form-section input[type=\"password\"] {\r\n  border: none;\r\n  background: transparent;\r\n  outline: none;\r\n  font-size: 1rem;\r\n  flex: 1;\r\n  padding: 0.5rem 0;\r\n}\r\n.login-btn {\r\n  width: 100%;\r\n  background: #ff6b6b;\r\n  color: #fff;\r\n  border: none;\r\n  padding: 0.8rem 0;\r\n  border-radius: 8px;\r\n  font-size: 1.1rem;\r\n  font-weight: 600;\r\n  margin-top: 0.5rem;\r\n  cursor: pointer;\r\n  transition: background 0.2s;\r\n}\r\n.login-btn:hover {\r\n  background: #e55a5a;\r\n}\r\n.login-extra {\r\n  margin-top: 1.2rem;\r\n  text-align: center;\r\n  font-size: 0.98rem;\r\n}\r\n.login-extra a {\r\n  color: #ff6b6b;\r\n  text-decoration: none;\r\n  font-weight: 600;\r\n}\r\n.login-extra a:hover {\r\n  text-decoration: underline;\r\n}\r\n@media (max-width: 700px) {\r\n  .login-container {\r\n    flex-direction: column;\r\n    max-width: 95vw;\r\n  }\r\n  .login-illustration {\r\n    width: 100%;\r\n    min-height: 180px;\r\n  }\r\n  .login-form-section {\r\n    padding: 1.5rem 1rem;\r\n  }\r\n}\r\n\r\n::view-transition-old(root),\r\n::view-transition-new(root) {\r\n  animation: fade-in 0.5s;\r\n}\r\n@keyframes fade-in {\r\n  from { opacity: 0; }\r\n  to { opacity: 1; }\r\n}"],"sourceRoot":""}]);
+}
+
+`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"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","sourcesContent":["body {\r\n  font-family: 'Segoe UI', Arial, sans-serif;\r\n  background: #f5f6fa;\r\n  margin: 0;\r\n  color: #222;\r\n}\r\n\r\nheader {\r\n  background: #ec7480;      /* warna sama dengan tombol login */\r\n  color: #fff;\r\n  padding: 0.7rem 0;\r\n  text-align: center;\r\n  font-size: 1.3rem;\r\n  font-weight: bold;\r\n  letter-spacing: 1px;\r\n  box-shadow: 0 2px 8px rgba(255,111,125,0.15);\r\n}\r\n\r\ninput#searchInput {\r\n  flex-grow: 1;\r\n  padding: 5px;\r\n  font-size: 1rem;\r\n}\r\n\r\n.stories-list {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  gap: 1.5rem;\r\n  justify-content: center;\r\n  margin: 2rem 0;\r\n}\r\n\r\n.story-card {\r\n  background: #fff;\r\n  border-radius: 12px;\r\n  box-shadow: 0 2px 8px rgba(0,0,0,0.07);\r\n  overflow: hidden;\r\n  width: 300px;\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n\r\n.story-img {\r\n  width: 100%;\r\n  height: 200px;\r\n  object-fit: cover;\r\n}\r\n\r\n.story-info {\r\n  padding: 1rem;\r\n}\r\n\r\n.story-title {\r\n  margin: 0 0 0.5rem 0;\r\n  font-size: 1.2rem;\r\n  color: #1976d2;\r\n}\r\n\r\n.story-desc {\r\n  margin: 0 0 0.5rem 0;\r\n}\r\n\r\n.story-meta {\r\n  font-size: 0.9rem;\r\n  color: #555;\r\n}\r\n\r\n.add-story-section {\r\n  max-width: 500px;\r\n  margin: 2rem auto;\r\n  background: #fff;\r\n  border-radius: 12px;\r\n  box-shadow: 0 2px 8px rgba(0,0,0,0.07);\r\n  padding: 2rem;\r\n}\r\n\r\n.add-story-form .form-row {\r\n  display: flex;\r\n  flex-direction: column;\r\n  margin-bottom: 1rem;\r\n}\r\n\r\n.add-story-form label {\r\n  margin-bottom: 0.3rem;\r\n  font-weight: 500;\r\n}\r\n\r\n.add-story-form input,\r\n.add-story-form textarea {\r\n  width: 100%;\r\n  padding: 0.5rem;\r\n  border-radius: 6px;\r\n  border: 1px solid #ccc;\r\n  font-size: 1rem;\r\n  margin-bottom: 0.5rem;\r\n}\r\n\r\n.add-story-form .button-row {\r\n  flex-direction: row;\r\n  gap: 1rem;\r\n}\r\n\r\n.add-story-form button[type=\"submit\"],\r\n.add-story-form button[type=\"button\"] {\r\n  background: #388e3c;\r\n  color: #fff;\r\n  border: none;\r\n  padding: 0.7rem 1.5rem;\r\n  border-radius: 6px;\r\n  font-size: 1rem;\r\n  cursor: pointer;\r\n}\r\n\r\n.add-story-form button[type=\"button\"]#cancel-btn {\r\n  background: #bdbdbd;\r\n  color: #222;\r\n}\r\n\r\n.add-story-form button[type=\"submit\"]:hover {\r\n  background: #2e7031;\r\n}\r\n\r\n.add-story-form button[type=\"button\"]:hover {\r\n  background: #888;\r\n}\r\n\r\n@media (max-width: 600px) {\r\n  #stories-list {\r\n    flex-direction: column;\r\n    align-items: center;\r\n  }\r\n  .story-card {\r\n    width: 95vw;\r\n  }\r\n  nav button {\r\n    width: 100%;\r\n    margin-bottom: 8px;\r\n  }\r\n}\r\n\r\n/* Login Page Modern */\r\n.login-container {\r\n  display: flex;\r\n  min-height: 80vh;\r\n  align-items: center;\r\n  justify-content: center;\r\n  background: #fff;\r\n  border-radius: 16px;\r\n  box-shadow: 0 4px 24px rgba(0,0,0,0.08);\r\n  max-width: 340px;   /* dari sebelumnya 370px atau lebih */\r\n  margin: 3rem auto;\r\n  overflow: hidden;\r\n}\r\n.login-illustration {\r\n  background: #ffe0e0;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  width: 320px;\r\n  min-height: 350px;\r\n}\r\n.login-illustration img {\r\n  width: 220px;\r\n  height: auto;\r\n}\r\n.login-form-section {\r\n  flex: 1;\r\n  padding: 2rem 2.5rem;\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n}\r\n.login-form-section h2 {\r\n  margin-bottom: 1.5rem;\r\n  color: #222;\r\n  font-size: 2rem;\r\n  font-weight: 700;\r\n}\r\n.input-group {\r\n  display: flex;\r\n  align-items: center;\r\n  background: #f5f6fa;\r\n  border-radius: 8px;\r\n  margin-bottom: 1rem;\r\n  padding: 0.5rem 1rem;\r\n  border: 1px solid #ddd;\r\n}\r\n.input-icon {\r\n  margin-right: 0.7rem;\r\n  color: #888;\r\n  font-size: 1.1rem;\r\n}\r\n.login-form-section input[type=\"email\"],\r\n.login-form-section input[type=\"password\"] {\r\n  border: none;\r\n  background: transparent;\r\n  outline: none;\r\n  font-size: 1rem;\r\n  flex: 1;\r\n  padding: 0.5rem 0;\r\n}\r\n.login-btn {\r\n  width: 100%;\r\n  background: #ff6b6b;\r\n  color: #fff;\r\n  border: none;\r\n  padding: 0.8rem 0;\r\n  border-radius: 8px;\r\n  font-size: 1.1rem;\r\n  font-weight: 600;\r\n  margin-top: 0.5rem;\r\n  cursor: pointer;\r\n  transition: background 0.2s;\r\n}\r\n.login-btn:hover {\r\n  background: #e55a5a;\r\n}\r\n.login-extra {\r\n  margin-top: 1.2rem;\r\n  text-align: center;\r\n  font-size: 0.98rem;\r\n}\r\n.login-extra a {\r\n  color: #ff6b6b;\r\n  text-decoration: none;\r\n  font-weight: 600;\r\n}\r\n.login-extra a:hover {\r\n  text-decoration: underline;\r\n}\r\n@media (max-width: 700px) {\r\n  .login-container {\r\n    flex-direction: column;\r\n    max-width: 95vw;\r\n  }\r\n  .login-illustration {\r\n    width: 100%;\r\n    min-height: 180px;\r\n  }\r\n  .login-form-section {\r\n    padding: 1.5rem 1rem;\r\n  }\r\n}\r\n\r\n/* Navbar Modern */\r\n.navbar {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\r\n  background: #fff;\r\n  border-radius: 0 0 12px 12px;\r\n  box-shadow: 0 2px 8px rgba(255,111,125,0.07);\r\n  padding: 0.7rem 2rem 0.7rem 2rem;\r\n  margin-bottom: 1.5rem;\r\n  gap: 1rem;\r\n}\r\n\r\n.nav-left, .nav-right {\r\n  display: flex;\r\n  gap: 1rem;\r\n}\r\n\r\n.navbar button {\r\n  background: #fff;\r\n  color: #ff6b6b;\r\n  border: 1.5px solid #ff6b6b;\r\n  border-radius: 6px;\r\n  padding: 0.45rem 1.2rem;\r\n  font-size: 1rem;\r\n  font-weight: 500;\r\n  cursor: pointer;\r\n  transition: background 0.2s, color 0.2s;\r\n  text-decoration: none;\r\n}\r\n\r\n.navbar button:hover {\r\n  background: #ff6b6b;\r\n  color: #fff;\r\n}\r\n\r\n@media (max-width: 700px) {\r\n  .navbar {\r\n    flex-direction: column;\r\n    align-items: stretch;\r\n    padding: 0.7rem 0.5rem;\r\n    gap: 0.5rem;\r\n  }\r\n  .nav-left, .nav-right {\r\n    justify-content: center;\r\n    gap: 0.5rem;\r\n  }\r\n}\r\n\r\n.skip-link {\r\n  position: absolute;\r\n  left: -999px;\r\n  top: auto;\r\n  width: 1px;\r\n  height: 1px;\r\n  overflow: hidden;\r\n  z-index: 100;\r\n  background: #222;\r\n  color: #fff;\r\n  padding: 8px 16px;\r\n  border-radius: 4px;\r\n}\r\n.skip-link:focus {\r\n  left: 16px;\r\n  top: 16px;\r\n  width: auto;\r\n  height: auto;\r\n  outline: 2px solid #1976d2;\r\n}\r\n\r\n::view-transition-old(root),\r\n::view-transition-new(root) {\r\n  animation: fade-in 0.5s;\r\n}\r\n@keyframes fade-in {\r\n  from { opacity: 0; }\r\n  to { opacity: 1; }\r\n}\r\n\r\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -16417,18 +16417,19 @@ module.exports = styleTagTransform;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   deleteMovie: () => (/* binding */ deleteMovie),
-/* harmony export */   getAllMovies: () => (/* binding */ getAllMovies),
-/* harmony export */   saveMovie: () => (/* binding */ saveMovie)
+/* harmony export */   deleteStory: () => (/* binding */ deleteStory),
+/* harmony export */   getAllStories: () => (/* binding */ getAllStories),
+/* harmony export */   getStory: () => (/* binding */ getStory),
+/* harmony export */   saveStory: () => (/* binding */ saveStory)
 /* harmony export */ });
 /* harmony import */ var idb__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! idb */ "./node_modules/idb/build/index.js");
 
 
 const DB_NAME = 'recap-db';
-const STORE_NAME = 'movies';
+const STORE_NAME = 'stories';
 
 async function getDB() {
-  return (0,idb__WEBPACK_IMPORTED_MODULE_0__.openDB)(DB_NAME, 1, {
+  return (0,idb__WEBPACK_IMPORTED_MODULE_0__.openDB)(DB_NAME, 2, { // Ganti versi ke 2
     upgrade(db) {
       if (!db.objectStoreNames.contains(STORE_NAME)) {
         db.createObjectStore(STORE_NAME, { keyPath: 'id' });
@@ -16437,20 +16438,26 @@ async function getDB() {
   });
 }
 
-async function saveMovie(movie) {
+async function saveStory(story) {
   const db = await getDB();
-  await db.put(STORE_NAME, movie);
+  await db.put(STORE_NAME, story);
 }
 
-async function getAllMovies() {
+async function getStory(id) {
+  const db = await getDB();
+  return db.get(STORE_NAME, id);
+}
+
+async function deleteStory(id) {
+  const db = await getDB();
+  await db.delete(STORE_NAME, id);
+}
+
+async function getAllStories() {
   const db = await getDB();
   return db.getAll(STORE_NAME);
 }
 
-async function deleteMovie(id) {
-  const db = await getDB();
-  return db.delete(STORE_NAME, id);
-}
 
 /***/ }),
 
@@ -16474,33 +16481,16 @@ __webpack_require__.r(__webpack_exports__);
 const API_URL = 'https://story-api.dicoding.dev/v1';
 
 async function login(email, password) {
-  const response = await fetch(`${API_URL}/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password }),
-  });
-  return response.json();
-}
-
-async function getStories(token) {
   try {
-    const response = await fetch(`${API_URL}/stories`, {
-      headers: { Authorization: `Bearer ${token}` },
+    const response = await fetch(`${API_URL}/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
     });
     return await response.json();
   } catch (err) {
-    // Kembalikan data kosong atau ambil dari IndexedDB
-    return { error: true, message: 'Offline', listStory: [] };
+    return { error: true, message: 'Gagal login. Cek koneksi internet.' };
   }
-}
-
-async function addStory(token, formData) {
-  const response = await fetch(`${API_URL}/stories`, {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${token}` },
-    body: formData,
-  });
-  return response.json();
 }
 
 function saveToken(token) {
@@ -16525,6 +16515,32 @@ async function register(name, email, password) {
   return response.json();
 }
 
+async function addStory(token, formData) {
+  try {
+    const response = await fetch(`${API_URL}/stories`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      body: formData
+    });
+    return await response.json();
+  } catch (err) {
+    return { error: true, message: 'Gagal menambah cerita. Cek koneksi internet.' };
+  }
+}
+
+async function getStories(token) {
+  try {
+    const response = await fetch(`${API_URL}/stories`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    return await response.json();
+  } catch (err) {
+    return { error: true, message: 'Gagal mengambil cerita.' };
+  }
+}
+
 
 /***/ }),
 
@@ -16540,7 +16556,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   initApp: () => (/* binding */ initApp),
 /* harmony export */   loadSavedStoriesOffline: () => (/* binding */ loadSavedStoriesOffline),
 /* harmony export */   loadStories: () => (/* binding */ loadStories),
-/* harmony export */   renderAddFilm: () => (/* binding */ renderAddFilm),
+/* harmony export */   renderAddStory: () => (/* binding */ renderAddStory),
 /* harmony export */   renderLogin: () => (/* binding */ renderLogin),
 /* harmony export */   renderLoginOrHome: () => (/* binding */ renderLoginOrHome),
 /* harmony export */   renderSavedStories: () => (/* binding */ renderSavedStories)
@@ -16552,96 +16568,78 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 function initApp(container) {
-  if ((0,_model_js__WEBPACK_IMPORTED_MODULE_0__.getToken)()) {
-    loadStories(container);
-  } else {
-    renderLogin(container);
-  }
+  // Hanya tampilkan login
+  renderLogin(container);
 }
 
 function renderLogin(container) {
-  if (document.startViewTransition) {
-    document.startViewTransition(() => {
-      container.innerHTML = (0,_view_js__WEBPACK_IMPORTED_MODULE_2__.showLoginForm)();
-      (0,_view_js__WEBPACK_IMPORTED_MODULE_2__.bindLoginForm)(container, async (email, password, setMessage) => {
-        setMessage('Logging in...');
-        const result = await (0,_model_js__WEBPACK_IMPORTED_MODULE_0__.login)(email, password);
-        if (!result.error) {
-          (0,_model_js__WEBPACK_IMPORTED_MODULE_0__.saveToken)(result.loginResult.token);
-          loadStories(container);
-        } else {
-          setMessage('Login gagal: ' + result.message);
-        }
-      });
-    });
-  } else {
-    container.innerHTML = (0,_view_js__WEBPACK_IMPORTED_MODULE_2__.showLoginForm)();
-    (0,_view_js__WEBPACK_IMPORTED_MODULE_2__.bindLoginForm)(container, async (email, password, setMessage) => {
-      setMessage('Logging in...');
-      const result = await (0,_model_js__WEBPACK_IMPORTED_MODULE_0__.login)(email, password);
-      if (!result.error) {
-        (0,_model_js__WEBPACK_IMPORTED_MODULE_0__.saveToken)(result.loginResult.token);
-        loadStories(container);
-      } else {
-        setMessage('Login gagal: ' + result.message);
-      }
-    });
-  }
-}
-
-// Fungsi untuk menampilkan daftar film
-async function loadStories(container) {
-  const token = (0,_model_js__WEBPACK_IMPORTED_MODULE_0__.getToken)();
-  const result = await (0,_model_js__WEBPACK_IMPORTED_MODULE_0__.getStories)(token);
-  if (result.error && result.message === 'Offline') {
-    // Ambil data dari IndexedDB
-    const savedStories = await (0,_idb_js__WEBPACK_IMPORTED_MODULE_1__.getAllMovies)();
-    container.innerHTML = (0,_view_js__WEBPACK_IMPORTED_MODULE_2__.showStoryList)(savedStories);
-    container.innerHTML += '<p>Anda sedang offline. Data diambil dari penyimpanan lokal.</p>';
-  } else {
-    // Ambil semua id story yang sudah disimpan di IndexedDB
-    const saved = await (0,_idb_js__WEBPACK_IMPORTED_MODULE_1__.getAllMovies)();
-    const savedIds = saved.map(s => s.id);
-
+  container.innerHTML = (0,_view_js__WEBPACK_IMPORTED_MODULE_2__.showLoginForm)();
+  (0,_view_js__WEBPACK_IMPORTED_MODULE_2__.bindLoginForm)(container, async (email, password, setMessage) => {
+    setMessage('Loading...');
+    const result = await (0,_model_js__WEBPACK_IMPORTED_MODULE_0__.login)(email, password);
     if (!result.error) {
-      container.innerHTML = (0,_view_js__WEBPACK_IMPORTED_MODULE_2__.showStoryList)(result.listStory, savedIds);
-      (0,_view_js__WEBPACK_IMPORTED_MODULE_2__.bindStoryListEvents)(container, {
-        onHome: () => window.location.hash = '#/',
-        onAdd: () => window.location.hash = '#/add',
-        onSaved: () => window.location.hash = '#/saved',
-        onLogout: () => {
-          (0,_model_js__WEBPACK_IMPORTED_MODULE_0__.clearToken)();
-          renderLogin(container);
-        },
-        onSave: async (id) => {
-          const story = result.listStory.find(s => s.id === id);
-          await (0,_idb_js__WEBPACK_IMPORTED_MODULE_1__.saveMovie)(story);
-          loadStories(container);
-        },
-        onMapReady: (map, stories) => {
-          const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '...' });
-          const sat = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', { attribution: '...' });
-          map.addLayer(osm);
-          L.control.layers({ "OSM": osm, "Satellite": sat }).addTo(map);
-
-          stories.forEach(story => {
-            if (story.lat && story.lon) {
-              const marker = L.marker([story.lat, story.lon]).addTo(map);
-              marker.bindPopup(`<b>${story.name}</b><br>${story.description}`);
-            }
-          });
-        }
-      }, result.listStory);
+      (0,_model_js__WEBPACK_IMPORTED_MODULE_0__.saveToken)(result.loginResult.token);
+      window.location.hash = '#/';
     } else {
-      container.innerHTML = '<p>Gagal memuat data.</p>';
+      setMessage('Login gagal: ' + result.message);
     }
+  });
+}
+
+// Fungsi untuk menampilkan daftar cerita
+async function loadStories(container) {
+  container.innerHTML = '<p>Loading stories...</p>';
+  try {
+    const token = (0,_model_js__WEBPACK_IMPORTED_MODULE_0__.getToken)();
+    if (!token) {
+      window.location.hash = '#/login';
+      return;
+    }
+    // Ganti baris ini:
+    // const stories = await fetchStories(token);
+    // Menjadi:
+    const response = await (0,_model_js__WEBPACK_IMPORTED_MODULE_0__.getStories)(token);
+    if (response.error) {
+      container.innerHTML = `<p>Error loading stories: ${response.message}</p>`;
+      return;
+    }
+    const stories = response.listStory || [];
+    container.innerHTML = (0,_view_js__WEBPACK_IMPORTED_MODULE_2__.showStoryList)(stories);
+    // Pastikan handlers sudah didefinisikan sebelum dipakai
+    (0,_view_js__WEBPACK_IMPORTED_MODULE_2__.bindStoryListEvents)(container, {
+      onAdd: () => window.location.hash = '#/add',
+      onLogout: () => {
+        (0,_model_js__WEBPACK_IMPORTED_MODULE_0__.clearToken)();
+        renderLogin(container);
+      },
+      onHome: () => window.location.hash = '#/',
+      onSaved: () => window.location.hash = '#/saved',
+      onSave: async (id) => {
+        const story = stories.find(s => s.id === id);
+        if (story) {
+          await (0,_idb_js__WEBPACK_IMPORTED_MODULE_1__.saveStory)(story);
+          loadStories(container);
+        }
+      },
+      onMapReady: (map, stories) => {
+        stories.forEach(story => {
+          if (story.lat && story.lon) {
+            L.marker([story.lat, story.lon]).addTo(map)
+              .bindPopup(`<b>${story.name}</b><br>${story.description}`);
+          }
+        });
+      }
+    }, stories);
+  } catch (err) {
+    container.innerHTML = `<p>Error loading stories: ${err.message}</p>`;
   }
 }
 
-async function renderAddFilm(container) {
-  container.innerHTML = (0,_view_js__WEBPACK_IMPORTED_MODULE_2__.showAddFilmForm)();
-  (0,_view_js__WEBPACK_IMPORTED_MODULE_2__.bindAddFilmForm)(container, async (formData, setMessage, stopCamera) => {
+async function renderAddStory(container) {
+  container.innerHTML = (0,_view_js__WEBPACK_IMPORTED_MODULE_2__.showAddStoryForm)();
+  (0,_view_js__WEBPACK_IMPORTED_MODULE_2__.bindAddStoryForm)(container, async (formData, setMessage, stopCamera) => {
     const token = (0,_model_js__WEBPACK_IMPORTED_MODULE_0__.getToken)();
     const result = await (0,_model_js__WEBPACK_IMPORTED_MODULE_0__.addStory)(token, formData);
     setMessage(result.message);
@@ -16650,9 +16648,19 @@ async function renderAddFilm(container) {
       // Tambahkan setelah story berhasil dibuat
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.ready.then(reg => {
-          reg.showNotification('Story berhasil dibuat', {
-            body: `Anda telah membuat story baru dengan deskripsi: ${formData.get('description')}`
-          });
+          if (Notification.permission === 'granted') {
+            reg.showNotification('Story berhasil dibuat', {
+              body: `Anda telah membuat story baru dengan deskripsi: ${formData.get('description')}`
+            });
+          } else if (Notification.permission !== 'denied') {
+            Notification.requestPermission().then(permission => {
+              if (permission === 'granted') {
+                reg.showNotification('Story berhasil dibuat', {
+                  body: `Anda telah membuat story baru dengan deskripsi: ${formData.get('description')}`
+                });
+              }
+            });
+          }
         });
       }
       window.location.hash = '#/';
@@ -16662,7 +16670,7 @@ async function renderAddFilm(container) {
 
 // Halaman Saved Stories
 async function renderSavedStories(container) {
-  const saved = await (0,_idb_js__WEBPACK_IMPORTED_MODULE_1__.getAllMovies)();
+  const saved = await (0,_idb_js__WEBPACK_IMPORTED_MODULE_1__.getAllStories)();
   container.innerHTML = (0,_view_js__WEBPACK_IMPORTED_MODULE_2__.showSavedStories)(saved);
   (0,_view_js__WEBPACK_IMPORTED_MODULE_2__.bindSavedListEvents)(container, {
     onHome: () => window.location.hash = '#/',
@@ -16671,7 +16679,7 @@ async function renderSavedStories(container) {
       renderLogin(container);
     },
     onDelete: async (id) => {
-      await (0,_idb_js__WEBPACK_IMPORTED_MODULE_1__.deleteMovie)(id);
+      await (0,_idb_js__WEBPACK_IMPORTED_MODULE_1__.deleteStory)(id);
       renderSavedStories(container);
     }
   });
@@ -16686,11 +16694,10 @@ function renderLoginOrHome(container) {
 }
 
 async function loadSavedStoriesOffline() {
-  const saved = await (0,_idb_js__WEBPACK_IMPORTED_MODULE_1__.getAllMovies)();
+  const saved = await (0,_idb_js__WEBPACK_IMPORTED_MODULE_1__.getAllStories)();
   // Tampilkan data yang disimpan secara offline
   document.getElementById('offline-content').innerHTML = (0,_view_js__WEBPACK_IMPORTED_MODULE_2__.showSavedStories)(saved);
 }
-
 
 /***/ }),
 
@@ -16707,25 +16714,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _presenter_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./presenter.js */ "./src/presenter.js");
 /* harmony import */ var _view_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./view.js */ "./src/view.js");
+/* harmony import */ var _model_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./model.js */ "./src/model.js");
+
 
 
 
 function router(container) {
   const hash = window.location.hash;
-  if (hash === '#/add') {
-    (0,_presenter_js__WEBPACK_IMPORTED_MODULE_0__.renderAddFilm)(container);
+  const token = (0,_model_js__WEBPACK_IMPORTED_MODULE_2__.getToken)();
+
+  if ((!hash || hash === '#/login') && token) {
+    window.location.hash = '#/';
+    return;
+  }
+  if (!token && hash !== '#/login') {
+    window.location.hash = '#/login';
+    return;
+  }
+
+  if (hash === '#/login') {
+    (0,_presenter_js__WEBPACK_IMPORTED_MODULE_0__.renderLogin)(container);
   } else if (hash === '#/saved') {
     (0,_presenter_js__WEBPACK_IMPORTED_MODULE_0__.renderSavedStories)(container);
-  } else if (hash === '#/login' || !hash) {
-    (0,_presenter_js__WEBPACK_IMPORTED_MODULE_0__.renderLogin)(container);
-  } else if (hash === '#/' || hash === '') {
-    (0,_presenter_js__WEBPACK_IMPORTED_MODULE_0__.loadStories)(container);
+  } else if (hash === '#/add') {
+    (0,_presenter_js__WEBPACK_IMPORTED_MODULE_0__.renderAddStory)(container);
   } else {
-    container.innerHTML = (0,_view_js__WEBPACK_IMPORTED_MODULE_1__.showNotFound)();
-    const backBtn = container.querySelector('#back-home');
-    if (backBtn) {
-      backBtn.onclick = () => window.location.hash = '#/';
-    }
+    (0,_presenter_js__WEBPACK_IMPORTED_MODULE_0__.loadStories)(container); // beranda
   }
 }
 
@@ -16795,11 +16809,11 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   bindAddFilmForm: () => (/* binding */ bindAddFilmForm),
+/* harmony export */   bindAddStoryForm: () => (/* binding */ bindAddStoryForm),
 /* harmony export */   bindLoginForm: () => (/* binding */ bindLoginForm),
 /* harmony export */   bindSavedListEvents: () => (/* binding */ bindSavedListEvents),
 /* harmony export */   bindStoryListEvents: () => (/* binding */ bindStoryListEvents),
-/* harmony export */   showAddFilmForm: () => (/* binding */ showAddFilmForm),
+/* harmony export */   showAddStoryForm: () => (/* binding */ showAddStoryForm),
 /* harmony export */   showLoginForm: () => (/* binding */ showLoginForm),
 /* harmony export */   showNotFound: () => (/* binding */ showNotFound),
 /* harmony export */   showSavedStories: () => (/* binding */ showSavedStories),
@@ -16807,25 +16821,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 function showLoginForm() {
   return `
-    <h2>Login</h2>
-    <form id="login-form">
-      <label for="email">Email</label>
-      <input type="email" id="email" placeholder="Email" required><br>
-      <label for="password">Password</label>
-      <input type="password" id="password" placeholder="Password" required><br>
-      <button type="submit">Login</button>
-    </form>
-    <p id="login-message"></p>
+    <div class="login-container">
+      
+      <section class="login-form-section">
+        <h2>Masuk ke Recap</h2>
+        <form id="login-form" autocomplete="on">
+          <div class="input-group">
+            <span class="input-icon">@</span>
+            <input type="email" id="email" name="email" placeholder="Email" required autocomplete="username" />
+          </div>
+          <div class="input-group">
+            <span class="input-icon">🔒</span>
+            <input type="password" id="password" name="password" placeholder="Password" required autocomplete="current-password" />
+          </div>
+          <button class="login-btn" type="submit">Masuk</button>
+        </form>
+        <div class="login-extra">
+          <a href="#">Lupa password?</a>
+        </div>
+        <div id="login-message" class="login-message"></div>
+      </section>
+    </div>
   `;
 }
 
 function showStoryList(stories, savedIds = []) {
   return `
-    <nav>
-      <button id="home-btn">Home</button>
-      <button id="add-btn">Tambah Film</button>
-      <button id="saved-btn">Saved Stories</button>
-      <button id="logout-btn">Logout</button>
+    <nav class="navbar">
+      <div class="nav-left">
+        <button id="home-btn">Home</button>
+        <button id="add-btn">Tambah Cerita</button>
+        <button id="saved-btn">Saved Stories</button>
+      </div>
+      <div class="nav-right">
+        <button id="logout-btn">Logout</button>
+      </div>
     </nav>
     <div id="stories-list" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin: 24px 0;">
       ${stories.map(story => `
@@ -16840,33 +16870,46 @@ function showStoryList(stories, savedIds = []) {
       `).join('')}
     </div>
     <div id="map" style="height: 300px; margin-top: 32px; border-radius: 12px; overflow: hidden;"></div>
-  `
+  `;
 }
 
-function showAddFilmForm() {
+function showAddStoryForm() {
   return `
-    <h2>Tambah Film</h2>
-    <form id="add-film-form" enctype="multipart/form-data" style="max-width: 400px; margin: 0 auto;">
-      <label for="description">Sinopsis</label>
-      <textarea id="description" required placeholder="Tulis sinopsis film..."></textarea>
-      <label for="photo">Poster Film</label>
-      <input type="file" id="photo" accept="image/*" required>
-      <div class="camera-section">
-        <video id="video" width="200" autoplay></video>
-        <button type="button" id="capture-btn">Ambil dari Kamera</button>
-        <canvas id="canvas" width="200" height="150" style="display:none;"></canvas>
-      </div>
-      <label for="lat">Latitude</label>
-      <input type="text" id="lat" required>
-      <label for="lon">Longitude</label>
-      <input type="text" id="lon" required>
-      <div style="display: flex; gap: 8px; margin-top: 16px;">
-        <button type="submit">Tambah</button>
-        <button type="button" id="cancel-btn">Batal</button>
-      </div>
-    </form>
-    <div id="add-film-message"></div>
-    <div id="map-add" style="height: 300px; margin-top: 32px; border-radius: 12px; overflow: hidden;"></div>
+    <section class="add-story-section">
+      <h2>Tambah Cerita</h2>
+      <form id="add-story-form" class="add-story-form">
+        <div class="form-row">
+          <label for="description">Sinopsis Cerita</label>
+          <textarea id="description" name="description" placeholder="Tulis sinopsis cerita..." required></textarea>
+        </div>
+        <div class="form-row">
+          <label for="photo">Poster Cerita</label>
+          <input type="file" id="photo" name="photo" accept="image/*" required>
+        </div>
+        <div class="form-row">
+          <img id="preview" style="display:none;max-width:100%;margin-bottom:1rem;" />
+        </div>
+        <div class="form-row">
+          <video id="video" autoplay playsinline style="max-width: 100%; border-radius: 8px;"></video>
+          <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+        </div>
+        <div class="form-row">
+          <button type="button" id="capture-btn">Ambil dari Kamera</button>
+        </div>
+        <div class="form-row">
+          <label for="lat">Latitude</label>
+          <input type="text" id="lat" name="lat" required>
+          <label for="lon" style="margin-left:1rem;">Longitude</label>
+          <input type="text" id="lon" name="lon" required>
+        </div>
+        <div id="map-add" style="height: 300px; margin: 24px 0; border-radius: 12px;"></div>
+        <div class="form-row button-row">
+          <button type="submit">Tambah Cerita</button>
+          <button type="button" id="cancel-btn">Batal</button>
+        </div>
+        <div id="add-story-message"></div>
+      </form>
+    </section>
   `;
 }
 
@@ -16897,7 +16940,6 @@ function showSavedStories(stories) {
   `;
 }
 
-// Event binding untuk login
 function bindLoginForm(container, onSubmit) {
   const form = container.querySelector('#login-form');
   const message = container.querySelector('#login-message');
@@ -16909,48 +16951,53 @@ function bindLoginForm(container, onSubmit) {
   });
 }
 
-// Event binding untuk story list dan peta
 function bindStoryListEvents(container, handlers, stories) {
-  container.querySelector('#add-btn').onclick = handlers.onAdd;
+  const addBtn = container.querySelector('#add-btn');
+  if (addBtn && handlers.onAdd) addBtn.onclick = handlers.onAdd;
   container.querySelector('#logout-btn').onclick = handlers.onLogout;
   container.querySelector('#home-btn').onclick = handlers.onHome;
   container.querySelector('#saved-btn').onclick = handlers.onSaved;
 
-  // Save button
   container.querySelectorAll('.save-btn').forEach(btn => {
     btn.onclick = () => handlers.onSave(btn.dataset.id);
   });
 
-  // Map
   if (typeof L !== 'undefined') {
     setTimeout(() => {
       const map = L.map('map').setView([-6.2, 106.8], 5);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
       handlers.onMapReady(map, stories);
     }, 100);
   }
 }
 
 function bindSavedListEvents(container, handlers) {
-  container.querySelector('#home-btn').onclick = handlers.onHome;
-  container.querySelector('#logout-btn').onclick = handlers.onLogout;
+  const homeBtn = container.querySelector('#home-btn');
+  if (homeBtn) homeBtn.onclick = handlers.onHome;
+
+  const logoutBtn = container.querySelector('#logout-btn');
+  if (logoutBtn) logoutBtn.onclick = handlers.onLogout;
+
   container.querySelectorAll('.delete-saved-btn').forEach(btn => {
     btn.onclick = () => handlers.onDelete(btn.dataset.id);
   });
 }
 
-// Event binding untuk tambah film, kamera, dan peta
-function bindAddFilmForm(container, onSubmit) {
-  const form = container.querySelector('#add-film-form');
-  const message = container.querySelector('#add-film-message');
+function bindAddStoryForm(container, onSubmit) {
+  const form = container.querySelector('#add-story-form');
+  const message = container.querySelector('#add-story-message');
   const video = container.querySelector('#video');
   const canvas = container.querySelector('#canvas');
   const captureBtn = container.querySelector('#capture-btn');
   const cancelBtn = container.querySelector('#cancel-btn');
   let stream;
 
-  // Peta lokasi
+  // Peta
   if (typeof L !== 'undefined') {
-    const map = L.map(container.querySelector('#map-add')).setView([-2.5489, 118.0149], 5);
+    const mapContainer = container.querySelector('#map-add');
+    const map = L.map(mapContainer).setView([-2.5489, 118.0149], 5);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
@@ -16991,7 +17038,6 @@ function bindAddFilmForm(container, onSubmit) {
     await onSubmit(formData, msg => message.textContent = msg, () => {});
   });
 
-  // Tombol batal kembali ke menu utama
   cancelBtn.addEventListener('click', () => {
     window.location.hash = '#/';
   });
@@ -17151,6 +17197,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var leaflet_dist_leaflet_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! leaflet/dist/leaflet.css */ "./node_modules/leaflet/dist/leaflet.css");
 /* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! leaflet */ "./node_modules/leaflet/dist/leaflet-src.js");
 /* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(leaflet__WEBPACK_IMPORTED_MODULE_4__);
+// src/app.js
 
 
 
@@ -17158,13 +17205,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const DB_NAME = 'recap-db';
-const STORE_NAME = 'movies';
+const STORE_NAME = 'stories'; // Ganti dari 'movies' ke 'stories'
 
-// Paksa buat object store saat aplikasi dijalankan
-(0,idb__WEBPACK_IMPORTED_MODULE_2__.openDB)(DB_NAME, 1, {
+(0,idb__WEBPACK_IMPORTED_MODULE_2__.openDB)(DB_NAME, 2, {
   upgrade(db) {
     if (!db.objectStoreNames.contains(STORE_NAME)) {
       db.createObjectStore(STORE_NAME, { keyPath: 'id' });
+      console.log;
     }
   }
 });
@@ -17177,29 +17224,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
 if ('serviceWorker' in navigator && 'PushManager' in window) {
   window.addEventListener('load', async () => {
-    const reg = await navigator.serviceWorker.register('/service-worker.js');
-    const permission = await Notification.requestPermission();
-    if (permission === 'granted') {
-      const vapidPublicKey = 'BCCs2eonMI-6H2ctvFaWg-UYdDv387Vno_bzUzALpB442r2lCnsHmtrx8biyPi_E-1fSGABK_Qs_GlvPoJJqxbk';
-      const convertedVapidKey = urlBase64ToUint8Array(vapidPublicKey);
-      try {
+    try {
+      const reg = await navigator.serviceWorker.register('/service-worker.js');
+      console.log('✅ Service Worker terdaftar:', reg);
+
+      // Tunggu sampai service worker aktif
+      if (reg.installing) {
+        await new Promise(resolve => {
+          reg.installing.addEventListener('statechange', function listener(e) {
+            if (e.target.state === 'activated') {
+              resolve();
+            }
+          });
+        });
+      } else if (reg.waiting) {
+        await new Promise(resolve => {
+          reg.waiting.addEventListener('statechange', function listener(e) {
+            if (e.target.state === 'activated') {
+              resolve();
+            }
+          });
+        });
+      }
+
+      const permission = await Notification.requestPermission();
+      if (permission === 'granted') {
+        const vapidPublicKey = 'BCCs2eonMI-6H2ctvFaWg-UYdDv387Vno_bzUzALpB442r2lCnsHmtrx8biyPi_E-1fSGABK_Qs_GlvPoJJqxbk';
+        const convertedVapidKey = urlBase64ToUint8Array(vapidPublicKey);
+
         await reg.pushManager.subscribe({
           userVisibleOnly: true,
           applicationServerKey: convertedVapidKey
         });
-      } catch (err) {
-        console.error('Push subscription error:', err);
+
+        console.log('✅ Push Notification berhasil disubscribe');
+      } else {
+        console.warn('❌ Izin notifikasi ditolak');
       }
+    } catch (err) {
+      console.error('❌ Error saat mendaftarkan Service Worker atau Push:', err);
     }
   });
 }
 
 function urlBase64ToUint8Array(base64String) {
-  // Kode helper yang benar, jangan ubah!
   const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
-  const base64 = (base64String + padding)
-    .replace(/-/g, '+')
-    .replace(/_/g, '/');
+  const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
   const rawData = window.atob(base64);
   const outputArray = new Uint8Array(rawData.length);
   for (let i = 0; i < rawData.length; ++i) {
@@ -17208,11 +17278,11 @@ function urlBase64ToUint8Array(base64String) {
   return outputArray;
 }
 
-try {
-  // fetch API
-} catch (err) {
-  // tampilkan pesan "Tidak bisa login saat offline"
-}
+leaflet__WEBPACK_IMPORTED_MODULE_4___default().Icon.Default.mergeOptions({
+  iconRetinaUrl: 'marker-icon-2x.png',
+  iconUrl: 'marker-icon.png',
+  shadowUrl: 'marker-shadow.png'
+});
 
 })();
 
